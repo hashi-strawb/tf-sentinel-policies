@@ -26,8 +26,9 @@ mandatory_tags = [
 mandatory_resource_tags = rule {
 	all aws_resources as _, resource {
 		all mandatory_tags as mt {
-			# TODO: check if resource is taggable
-			(resource.change.after.tags contains mt) or not print("resource:", resource.address, "missing tag:", mt, "change:", resource.change.after.tags)
+			(resource.change.after.tags == null) or
+				(resource.change.after.tags contains mt) or
+				not print("resource:", resource.address, "missing tag:", mt, "change:", resource.change.after.tags)
 		}
 	}
 }
