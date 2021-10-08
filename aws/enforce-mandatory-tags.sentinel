@@ -21,7 +21,6 @@ mandatory_tags = [
 	"purpose",
 	"this-tag-does-not-exist",
 ]
-print("checking tag ", mandatory_tags)
 
 # Rule to enforce tags on all instances
 mandatory_instance_tags = rule {
@@ -30,7 +29,7 @@ mandatory_instance_tags = rule {
 			# TODO: check if resource is taggable
 
 			instance.change.after.tags contains mt or
-				not print("resource:", instance, "missing tag:", mt)
+				not print("resource:", instance.address, "missing tag:", mt)
 		}
 	}
 }
