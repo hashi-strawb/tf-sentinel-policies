@@ -4,9 +4,9 @@
 # Imports mock data
 import "tfplan/v2" as tfplan
 
-# Get all AWS instances from all modules
+# Get all AWS resources from all modules
 ec2_instances = filter tfplan.resource_changes as _, rc {
-    rc.type is "aws_instance" and
+    strings.has_prefix(rc.type, "aws_")
         (rc.change.actions contains "create" or rc.change.actions is ["update"])
 }
 
@@ -24,6 +24,7 @@ mandatory_tags = [
 mandatory_instance_tags = rule {
     all ec2_instances as _, instance {
         all mandatory_tags as mt {
+            # TODO: check if resource is taggable
             instance.change.after.tags contains mt
         }
     }
