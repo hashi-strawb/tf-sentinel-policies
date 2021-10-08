@@ -8,7 +8,7 @@ import "strings"
 
 # Get all AWS resources from all modules
 ec2_instances = filter tfplan.resource_changes as _, rc {
-	strings.has_prefix(rc.type, "aws_") and
+	strings.has_prefix(rc.type, "aws_autoscaling") and
 		(rc.change.actions contains "create" or rc.change.actions is ["update"])
 }
 
@@ -28,8 +28,9 @@ mandatory_instance_tags = rule {
 		all mandatory_tags as mt {
 			# TODO: check if resource is taggable
 
-			instance.change.after.tags contains mt or
-				not print("resource:", instance.address, "missing tag:", mt)
+			instance.change.after.tags contains mt
+
+			# or    not print("resource:", instance.address, "missing tag:", mt)
 		}
 	}
 }
