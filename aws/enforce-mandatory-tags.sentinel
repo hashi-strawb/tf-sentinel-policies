@@ -25,11 +25,9 @@ mandatory_instance_tags = rule {
 	all ec2_instances as _, instance {
 		all mandatory_tags as mt {
 			# TODO: check if resource is taggable
-			
-			# Rule for specific tag
-			rule {
-				instance.change.after.tags contains mt
-			}
+
+			print("checking tag ", mt)
+			instance.change.after.tags contains mt
 		}
 	}
 }
