@@ -6,7 +6,7 @@ import "tfplan/v2" as tfplan
 
 # Get all AWS resources from all modules
 ec2_instances = filter tfplan.resource_changes as _, rc {
-    strings.has_prefix(rc.type, "aws_")
+    strings.has_prefix(rc.type, "aws_") and
         (rc.change.actions contains "create" or rc.change.actions is ["update"])
 }
 
