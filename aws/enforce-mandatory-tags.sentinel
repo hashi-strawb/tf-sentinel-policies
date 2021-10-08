@@ -17,6 +17,7 @@ mandatory_tags = [
     "owner",
     "terraform",
     "purpose",
+    "this-tag-does-not-exist",
 ]
 
 # Rule to enforce tags on all instances
