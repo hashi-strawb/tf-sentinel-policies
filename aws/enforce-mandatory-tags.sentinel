@@ -8,7 +8,7 @@ import "strings"
 
 # Get all AWS resources from all modules
 aws_resources = filter tfplan.resource_changes as _, rc {
-	strings.has_prefix(rc.type, "aws_autoscaling") and
+	strings.has_prefix(rc.type, "aws_") and
 		(rc.change.actions contains "create" or rc.change.actions is ["update"])
 }
 
@@ -26,7 +26,13 @@ mandatory_tags = [
 mandatory_resource_tags = rule {
 	all aws_resources as _, resource {
 		all mandatory_tags as mt {
-			((resource.change.after.tags == null) and print("resource untaggable:", resource.address, "change:", resource.change.after.tags)) or
+			((resource.change.after.tags == null) and
+				print("resource untaggable:", resource.address, "change:", resource.change.after.tags)) or
+
+				# TODO: this doesn't work yet
+				# e.g.
+				# resource: module.nomad.module.servers.aws_autoscaling_group.autoscaling_group missing tag: Name change: [{"key": "Environment", "propagate_at_launch": "true", "value": "development"} {"key": "Name", "propagate_at_launch": "true", "value": "strawb-server"} {"key": "nomad-servers", "propagate_at_launch": "true", "value": "auto-join"}]
+				# need to check keys
 				(resource.change.after.tags contains mt) or
 				not print("resource:", resource.address, "missing tag:", mt, "change:", resource.change.after.tags)
 		}
