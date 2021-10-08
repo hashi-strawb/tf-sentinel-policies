@@ -1,3 +1,5 @@
+# Check all resources have required tags
+
 # Based on https://github.com/hashicorp/learn-sentinel-policy-upload/blob/main/restrict-aws-instances-type-and-tag.sentinel
 
 # Imports mock data
@@ -19,6 +21,7 @@ mandatory_tags = [
 	"purpose",
 	"this-tag-does-not-exist",
 ]
+print("checking tag ", mandatory_tags)
 
 # Rule to enforce tags on all instances
 mandatory_instance_tags = rule {
@@ -26,7 +29,6 @@ mandatory_instance_tags = rule {
 		all mandatory_tags as mt {
 			# TODO: check if resource is taggable
 
-			print("checking tag ", mt)
 			instance.change.after.tags contains mt
 		}
 	}
