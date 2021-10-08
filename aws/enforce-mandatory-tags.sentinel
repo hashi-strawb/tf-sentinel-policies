@@ -29,7 +29,8 @@ mandatory_instance_tags = rule {
 		all mandatory_tags as mt {
 			# TODO: check if resource is taggable
 
-			instance.change.after.tags contains mt
+			instance.change.after.tags contains mt or
+				not print("resource:", instance, "missing tag:", mt)
 		}
 	}
 }
