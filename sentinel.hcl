@@ -1,4 +1,4 @@
 policy "aws-advise-mandatory-tags" {
-  source            = "enforce-mandatory-tags.sentinel"
+  source            = "./aws/enforce-mandatory-tags.sentinel"
   enforcement_level = "advisory"
 }
