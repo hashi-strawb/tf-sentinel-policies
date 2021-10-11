@@ -19,22 +19,45 @@ mandatory_tags = [
 	"owner",
 	"terraform",
 	"purpose",
-	"this-tag-does-not-exist",
 ]
+
+is_taggable = func(resource) {
+	if (keys(resource.change.after) contains "tags" or keys(resource.change.after) contains "all_tags") {
+		return true
+	}
+
+	return false
+}
+
+check_tags = func(resource, mt) {
+	# if the resource is untaggable, this rule does not apply
+	if not is_taggable(resource) {
+		return true
+	}
+
+	# Check tags explicitly defined on the resource
+	if (keys(resource.change.after) contains "tags" and resource.change.after.tags is not null) {
+		if (resource.change.after.tags contains mt) {
+			return true
+		}
+	}
+
+	# Check tags defined on the Terraform provider
+	if (keys(resource.change.after) contains "all_tags" and resource.change.after.all_tags is not null) {
+		if (resource.change.after.all_tags contains mt) {
+			return true
+		}
+	}
+
+	return false
+}
 
 # Rule to enforce tags on all resources
 mandatory_resource_tags = rule {
 	all aws_resources as _, resource {
 		all mandatory_tags as mt {
-			((resource.change.after.tags == null) and
-				print("resource untaggable:", resource.address, "change:", resource.change.after.tags)) or
-
-				# TODO: this doesn't work yet
-				# e.g.
-				# resource: module.nomad.module.servers.aws_autoscaling_group.autoscaling_group missing tag: Name change: [{"key": "Environment", "propagate_at_launch": "true", "value": "development"} {"key": "Name", "propagate_at_launch": "true", "value": "strawb-server"} {"key": "nomad-servers", "propagate_at_launch": "true", "value": "auto-join"}]
-				# need to check keys
-				(resource.change.after.tags contains mt) or
-				not print("resource:", resource.address, "missing tag:", mt, "change:", resource.change.after.tags)
+			(check_tags(resource, mt)) or
+				not print("Resource Failed:", resource.address, "Missing tag:", mt)
 		}
 	}
 }
