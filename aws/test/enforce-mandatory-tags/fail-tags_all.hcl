@@ -2,7 +2,7 @@
 
 mock "tfplan/v2" {
   module {
-    source = "../../mocks/mock-tfplan-fail-nomad-v2.sentinel"
+    source = "../../mocks/mock-tfplan-fail-tags_all-v2.sentinel"
   }
 }
 

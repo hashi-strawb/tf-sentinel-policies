@@ -9,20 +9,21 @@ import "strings"
 # Get all AWS resources from all modules
 aws_resources = filter tfplan.resource_changes as _, rc {
 	strings.has_prefix(rc.type, "aws_") and
+		rc.type is not "aws_autoscaling_group" and # TODO: these do weird stuff...
 		(rc.change.actions contains "create" or rc.change.actions is ["update"])
 }
 
 # Mandatory Resource Tags
 mandatory_tags = [
 	"Name",
-	"ttl",
-	"owner",
-	"terraform",
-	"purpose",
+	"TTL",
+	"Owner",
+	"Terraform",
+	"Purpose",
 ]
 
 is_taggable = func(resource) {
-	if (keys(resource.change.after) contains "tags" or keys(resource.change.after) contains "all_tags") {
+	if (keys(resource.change.after) contains "tags" or keys(resource.change.after) contains "tags_all") {
 		return true
 	}
 
@@ -35,34 +36,47 @@ check_tags = func(resource, mt) {
 		return true
 	}
 
+	# TODO: can we define some tags to be case insensitive?
+
 	# Check tags explicitly defined on the resource
-	if (keys(resource.change.after) contains "tags" and resource.change.after.tags is not null) {
+	if (keys(resource.change.after) contains "tags" and resource.change.after.tags is not null and resource.change.after.tags is not empty) {
 		if (resource.change.after.tags contains mt) {
 			return true
 		}
 	}
 
 	# Check tags defined on the Terraform provider
-	if (keys(resource.change.after) contains "all_tags" and resource.change.after.all_tags is not null) {
-		if (resource.change.after.all_tags contains mt) {
+	if (keys(resource.change.after) contains "tags_all" and resource.change.after.tags_all is not null and resource.change.after.tags_all is not empty) {
+		if (resource.change.after.tags_all contains mt) {
 			return true
 		}
 	}
 
+	# TODO: check for tags defined as key/value
+	# (i.e. tag?)
+
+	print(resource.address, "missing tag:", mt)
 	return false
 }
 
-# Rule to enforce tags on all resources
-mandatory_resource_tags = rule {
-	all aws_resources as _, resource {
-		all mandatory_tags as mt {
-			(check_tags(resource, mt)) or
-				not print("Resource Failed:", resource.address, "Missing tag:", mt)
+# TODO: report on all errors
+check_all_resources = func() {
+	# Assume pass until proven otherwise
+	rule_pass = true
+
+	for aws_resources as _, resource {
+		for mandatory_tags as mt {
+			# if any instance of check_tags fails, set rule_pass to false
+			if not check_tags(resource, mt) {
+				rule_pass = false
+			}
 		}
 	}
+
+	return rule_pass
 }
 
 # Main rule that requires other rules to be true
 main = rule {
-	(mandatory_resource_tags) else true
+	(check_all_resources()) else true
 }
