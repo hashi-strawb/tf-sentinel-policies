@@ -54,12 +54,20 @@ check_tags = func(resource, mt) {
 
 	# TODO: check for tags defined as key/value
 	# (i.e. tag?)
+	# Check aws_autoscaling_group for an example of these
 
 	print(resource.address, "missing tag:", mt)
 	return false
 }
 
-# TODO: report on all errors
+# Unlike the example from hashicorp/learn-sentinel-policy-upload
+# we're doing this in a function, so that Sentinel can check everything, rather
+# than fail at the first hurdle.
+#
+# The reason for this is that it gives a much more verbose error log in TFC as to what's missing.
+#
+# In practice, all these mandatory tags would be set at the Terraform Provider level...
+# but I wanted it to work like this as an example, dammit!
 check_all_resources = func() {
 	# Assume pass until proven otherwise
 	rule_pass = true
@@ -76,7 +84,7 @@ check_all_resources = func() {
 	return rule_pass
 }
 
-# Main rule that requires other rules to be true
+# Check that all resources have required tags
 main = rule {
 	(check_all_resources()) else true
 }
