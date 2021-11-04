@@ -20,6 +20,7 @@ mandatory_tags = [
 	"Owner",
 	"Terraform",
 	"Purpose",
+	"Source",
 ]
 
 is_taggable = func(resource) {
