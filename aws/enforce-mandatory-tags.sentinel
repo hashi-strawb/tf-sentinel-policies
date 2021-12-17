@@ -9,7 +9,14 @@ import "strings"
 # Get all AWS resources from all modules
 aws_resources = filter tfplan.resource_changes as _, rc {
 	strings.has_prefix(rc.type, "aws_") and
-		rc.type is not "aws_autoscaling_group" and # TODO: these do weird stuff...
+
+		# TODO: these do weird stuff...
+		rc.type is not "aws_autoscaling_group" and
+
+		# While we CAN tag IAM users, we are restricted on what IAM users we can create
+		# and also what tags we can add to said IAM users.
+		# So do not check the policy for these.
+		rc.type is not "aws_iam_user" and
 		(rc.change.actions contains "create" or rc.change.actions is ["update"])
 }
 
