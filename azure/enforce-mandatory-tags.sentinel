@@ -6,18 +6,10 @@
 import "tfplan/v2" as tfplan
 import "strings"
 
-# Get all AWS resources from all modules
-aws_resources = filter tfplan.resource_changes as _, rc {
-	strings.has_prefix(rc.type, "aws_") and
-
-		# TODO: these do weird stuff...
-		rc.type is not "aws_autoscaling_group" and
-
-		# While we CAN tag IAM users, we are restricted on what IAM users we can create
-		# and also what tags we can add to said IAM users.
-		# So do not check the policy for these.
-		rc.type is not "aws_iam_user" and
-		(rc.change.actions contains "create" or rc.change.actions is ["update"])
+# Get all Azure resources from all modules
+azure_resources = filter tfplan.resource_changes as _, rc {
+	# We just care about resource groups for now
+	rc.type is "azurerm_resource_group"
 }
 
 # Mandatory Resource Tags
@@ -31,39 +23,13 @@ mandatory_tags = [
 	"Workspace",
 ]
 
-is_taggable = func(resource) {
-	if (keys(resource.change.after) contains "tags" or keys(resource.change.after) contains "tags_all") {
-		return true
-	}
-
-	return false
-}
-
 check_tags = func(resource, mt) {
-	# if the resource is untaggable, this rule does not apply
-	if not is_taggable(resource) {
-		return true
-	}
-
-	# TODO: can we define some tags to be case insensitive?
-
 	# Check tags explicitly defined on the resource
 	if (keys(resource.change.after) contains "tags" and resource.change.after.tags is not null and resource.change.after.tags is not empty) {
 		if (resource.change.after.tags contains mt) {
 			return true
 		}
 	}
-
-	# Check tags defined on the Terraform provider
-	if (keys(resource.change.after) contains "tags_all" and resource.change.after.tags_all is not null and resource.change.after.tags_all is not empty) {
-		if (resource.change.after.tags_all contains mt) {
-			return true
-		}
-	}
-
-	# TODO: check for tags defined as key/value
-	# (i.e. tag?)
-	# Check aws_autoscaling_group for an example of these
 
 	print(resource.address, "missing tag:", mt)
 	return false
@@ -81,7 +47,7 @@ check_all_resources = func() {
 	# Assume pass until proven otherwise
 	rule_pass = true
 
-	for aws_resources as _, resource {
+	for azure_resources as _, resource {
 		for mandatory_tags as mt {
 			# if any instance of check_tags fails, set rule_pass to false
 			if not check_tags(resource, mt) {
