@@ -24,6 +24,11 @@ mandatory_tags = [
 ]
 
 check_tags = func(resource, mt) {
+	# When destroying...
+	if resource.change.after is null {
+		return true
+	}
+
 	# Check tags explicitly defined on the resource
 	if (keys(resource.change.after) contains "tags" and resource.change.after.tags is not null and resource.change.after.tags is not empty) {
 		if (resource.change.after.tags contains mt) {

@@ -1,0 +1,1971 @@
+terraform_version = "1.1.3"
+
+planned_values = {
+	"outputs":   {},
+	"resources": {},
+}
+
+variables = {
+	"machine_size": {
+		"name":  "machine_size",
+		"value": "Standard_B1ls",
+	},
+}
+
+resource_changes = {
+	"module.webserver.azurerm_linux_virtual_machine.example": {
+		"address": "module.webserver.azurerm_linux_virtual_machine.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"additional_capabilities": [],
+				"admin_password":          "REDACTED_SENSITIVE",
+				"admin_ssh_key": [
+					{
+						"public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqi++bl2HcZdR5juWIXG4EkQcpXN0ir29DsSE8pEbrPg3TimptdjLdwarrfFZEX9Vvj7GACjAH7DqqvDoFbo0/Ax+Mwz/JiXSSR4QOfwXOvKqQq8K3LQFl8prJN/Glp9kLPjfIvHiBqP7YOWPuwDPIQ8REQWCfcDyeuLaTml/QreaWLjXYQu1HG+Q7OmRZmBV9Ocipd18JcB2YlURpkG8b9N9DEsVGrxB/AOhrHbe3GdVcRTFjEGXMlc53MQEG90pN6JWvgkb2VbjfCxV+OoVw9Tpw+IKTYdqJ6MvaNswEs9JCiS4IdEq0Ef6XGJacebspUOwjZo8dBtiXaB1PgyR\n",
+						"username":   "adminuser",
+					},
+				],
+				"admin_username":                  "adminuser",
+				"allow_extension_operations":      true,
+				"availability_set_id":             "",
+				"boot_diagnostics":                [],
+				"computer_name":                   "example-machine",
+				"custom_data":                     "REDACTED_SENSITIVE",
+				"dedicated_host_id":               "",
+				"disable_password_authentication": true,
+				"encryption_at_host_enabled":      false,
+				"eviction_policy":                 "",
+				"extensions_time_budget":          "PT1H30M",
+				"id":            "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Compute/virtualMachines/example-machine",
+				"identity":      [],
+				"license_type":  "",
+				"location":      "uksouth",
+				"max_bid_price": -1,
+				"name":          "example-machine",
+				"network_interface_ids": [
+					"/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+				],
+				"os_disk": [
+					{
+						"caching":                   "ReadWrite",
+						"diff_disk_settings":        [],
+						"disk_encryption_set_id":    "",
+						"disk_size_gb":              30,
+						"name":                      "example-machine_OsDisk_1_d57fd3e4588f4b568d0492013ddacff3",
+						"storage_account_type":      "Standard_LRS",
+						"write_accelerator_enabled": false,
+					},
+				],
+				"patch_mode":            "ImageDefault",
+				"plan":                  [],
+				"platform_fault_domain": -1,
+				"priority":              "Regular",
+				"private_ip_address":    "10.0.2.4",
+				"private_ip_addresses": [
+					"10.0.2.4",
+				],
+				"provision_vm_agent":           true,
+				"proximity_placement_group_id": "",
+				"public_ip_address":            "20.108.176.202",
+				"public_ip_addresses": [
+					"20.108.176.202",
+				],
+				"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+				"secret":              [],
+				"secure_boot_enabled": false,
+				"size":                "Standard_B1ls",
+				"source_image_id":     "",
+				"source_image_reference": [
+					{
+						"offer":     "UbuntuServer",
+						"publisher": "Canonical",
+						"sku":       "16.04-LTS",
+						"version":   "latest",
+					},
+				],
+				"tags":                         {},
+				"timeouts":                     null,
+				"user_data":                    "",
+				"virtual_machine_id":           "0525c089-0eba-49f4-aa2c-5bf41ea7985e",
+				"virtual_machine_scale_set_id": "",
+				"vtpm_enabled":                 false,
+				"zone":                         "",
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_linux_virtual_machine",
+	},
+	"module.webserver.azurerm_network_interface.example": {
+		"address": "module.webserver.azurerm_network_interface.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"applied_dns_servers":           [],
+				"dns_servers":                   [],
+				"enable_accelerated_networking": false,
+				"enable_ip_forwarding":          false,
+				"id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+				"internal_dns_name_label":     "",
+				"internal_domain_name_suffix": "yqneii3awzpujc3esjse2uq2rd.zx.internal.cloudapp.net",
+				"ip_configuration": [
+					{
+						"gateway_load_balancer_frontend_ip_configuration_id": "",
+						"name":                          "internal",
+						"primary":                       true,
+						"private_ip_address":            "10.0.2.4",
+						"private_ip_address_allocation": "Dynamic",
+						"private_ip_address_version":    "IPv4",
+						"public_ip_address_id":          "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/publicIPAddresses/strawbtest-public-ip",
+						"subnet_id":                     "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+					},
+				],
+				"location":           "uksouth",
+				"mac_address":        "00-22-48-40-68-60",
+				"name":               "example-nic",
+				"private_ip_address": "10.0.2.4",
+				"private_ip_addresses": [
+					"10.0.2.4",
+				],
+				"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+				"tags":                {},
+				"timeouts":            null,
+				"virtual_machine_id":  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Compute/virtualMachines/example-machine",
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_network_interface",
+	},
+	"module.webserver.azurerm_network_interface_security_group_association.example": {
+		"address": "module.webserver.azurerm_network_interface_security_group_association.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic|/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+				"network_interface_id":      "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+				"network_security_group_id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+				"timeouts":                  null,
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_network_interface_security_group_association",
+	},
+	"module.webserver.azurerm_network_security_group.example": {
+		"address": "module.webserver.azurerm_network_security_group.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"id":                  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+				"location":            "uksouth",
+				"name":                "http_and_ssh",
+				"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+				"security_rule": [
+					{
+						"access":                                     "Allow",
+						"description":                                "",
+						"destination_address_prefix":                 "*",
+						"destination_address_prefixes":               [],
+						"destination_application_security_group_ids": [],
+						"destination_port_range":                     "22",
+						"destination_port_ranges":                    [],
+						"direction":                                  "Inbound",
+						"name":                                       "AllowSSHInBound",
+						"priority":                                   120,
+						"protocol":                                   "TCP",
+						"source_address_prefix":                      "*",
+						"source_address_prefixes":                    [],
+						"source_application_security_group_ids":      [],
+						"source_port_range":                          "*",
+						"source_port_ranges":                         [],
+					},
+					{
+						"access":                                     "Allow",
+						"description":                                "",
+						"destination_address_prefix":                 "*",
+						"destination_address_prefixes":               [],
+						"destination_application_security_group_ids": [],
+						"destination_port_range":                     "80",
+						"destination_port_ranges":                    [],
+						"direction":                                  "Inbound",
+						"name":                                       "AllowHTTPInBound",
+						"priority":                                   100,
+						"protocol":                                   "TCP",
+						"source_address_prefix":                      "*",
+						"source_address_prefixes":                    [],
+						"source_application_security_group_ids":      [],
+						"source_port_range":                          "*",
+						"source_port_ranges":                         [],
+					},
+				],
+				"tags":     {},
+				"timeouts": null,
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_network_security_group",
+	},
+	"module.webserver.azurerm_public_ip.example": {
+		"address": "module.webserver.azurerm_public_ip.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"allocation_method": "Static",
+				"availability_zone": "No-Zone",
+				"domain_name_label": null,
+				"fqdn":              null,
+				"id":                "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/publicIPAddresses/strawbtest-public-ip",
+				"idle_timeout_in_minutes": 4,
+				"ip_address":              "20.108.176.202",
+				"ip_tags":                 {},
+				"ip_version":              "IPv4",
+				"location":                "uksouth",
+				"name":                    "strawbtest-public-ip",
+				"public_ip_prefix_id":     null,
+				"resource_group_name":     "strawb-tfc-demo-webserver-azure-test",
+				"reverse_fqdn":            null,
+				"sku":                     "Basic",
+				"sku_tier":                "Regional",
+				"tags":                    {},
+				"timeouts":                null,
+				"zones":                   [],
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_public_ip",
+	},
+	"module.webserver.azurerm_resource_group.example": {
+		"address": "module.webserver.azurerm_resource_group.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"id":       "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test",
+				"location": "uksouth",
+				"name":     "strawb-tfc-demo-webserver-azure-test",
+				"tags": {
+					"Name":      "StrawbTest",
+					"Owner":     "lucy.davinhart@hashicorp.com",
+					"Purpose":   "Terraform TFC Demo Org (FancyCorp)",
+					"Source":    "https://github.com/hashi-strawb/demo-tfcb-fancycorp/tree/main/terraform-azure",
+					"TTL":       "24h",
+					"Terraform": "true",
+					"Workspace": "webserver-azure-test",
+				},
+				"timeouts": null,
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_resource_group",
+	},
+	"module.webserver.azurerm_subnet.example": {
+		"address": "module.webserver.azurerm_subnet.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"address_prefix": "10.0.2.0/24",
+				"address_prefixes": [
+					"10.0.2.0/24",
+				],
+				"delegation": [],
+				"enforce_private_link_endpoint_network_policies": false,
+				"enforce_private_link_service_network_policies":  false,
+				"id":                          "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+				"name":                        "internal",
+				"resource_group_name":         "strawb-tfc-demo-webserver-azure-test",
+				"service_endpoint_policy_ids": [],
+				"service_endpoints":           [],
+				"timeouts":                    null,
+				"virtual_network_name":        "strawb-network",
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_subnet",
+	},
+	"module.webserver.azurerm_virtual_network.example": {
+		"address": "module.webserver.azurerm_virtual_network.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"address_space": [
+					"10.0.0.0/16",
+				],
+				"bgp_community":           "",
+				"ddos_protection_plan":    [],
+				"dns_servers":             [],
+				"flow_timeout_in_minutes": 0,
+				"guid":                "23441ac4-b6a0-445f-8ba4-92644e521c8b",
+				"id":                  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network",
+				"location":            "uksouth",
+				"name":                "strawb-network",
+				"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+				"subnet": [
+					{
+						"address_prefix": "10.0.2.0/24",
+						"id":             "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+						"name":           "internal",
+						"security_group": "",
+					},
+				],
+				"tags":                  {},
+				"timeouts":              null,
+				"vm_protection_enabled": false,
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+		"type":           "azurerm_virtual_network",
+	},
+	"module.webserver.tls_private_key.example": {
+		"address": "module.webserver.tls_private_key.example",
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": {},
+			"before": {
+				"algorithm":                  "RSA",
+				"ecdsa_curve":                "P224",
+				"id":                         "364c73cdc08010cbe4239921fbf4325807c619bf",
+				"private_key_pem":            "REDACTED_SENSITIVE",
+				"public_key_fingerprint_md5": "9d:81:66:e3:89:28:05:a1:5a:a5:5b:7e:39:ad:d8:c5",
+				"public_key_openssh":         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqi++bl2HcZdR5juWIXG4EkQcpXN0ir29DsSE8pEbrPg3TimptdjLdwarrfFZEX9Vvj7GACjAH7DqqvDoFbo0/Ax+Mwz/JiXSSR4QOfwXOvKqQq8K3LQFl8prJN/Glp9kLPjfIvHiBqP7YOWPuwDPIQ8REQWCfcDyeuLaTml/QreaWLjXYQu1HG+Q7OmRZmBV9Ocipd18JcB2YlURpkG8b9N9DEsVGrxB/AOhrHbe3GdVcRTFjEGXMlc53MQEG90pN6JWvgkb2VbjfCxV+OoVw9Tpw+IKTYdqJ6MvaNswEs9JCiS4IdEq0Ef6XGJacebspUOwjZo8dBtiXaB1PgyR\n",
+				"public_key_pem":             "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxaovvm5dh3GXUeY7liFx\nuBJEHKVzdIq9vQ7EhPKRG6z4N04pqbXYy3cGq63xWRF/Vb4+xgAowB+w6qrw6BW6\nNPwMfjMM/yYl0kkeEDn8FzryqkKvCty0BZfKayTfxpafZCz43yLx4gaj+2Dlj7sA\nzyEPEREFgn3A8nri2k5pf0K3mli412ELtRxvkOzpkWZgVfTnIqXdfCXAdmJVEaZB\nvG/TfQxLFRq8QfwDoax23txnVXEUxYxBlzJXOdzEBBvdKTeiVr4JG9lW43wsVfjq\nFcPU6cPiCk2HaiejL2jbMBLPSQokuCHRKtBH+lxiWnHm7KVDsI2aPHQbYl2gdT4M\nkQIDAQAB\n-----END PUBLIC KEY-----\n",
+				"rsa_bits":                   2048,
+			},
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.webserver",
+		"name":           "example",
+		"provider_name":  "registry.terraform.io/hashicorp/tls",
+		"type":           "tls_private_key",
+	},
+}
+
+output_changes = {
+	"private_ssh_key": {
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         "REDACTED_SENSITIVE",
+			"after_unknown": false,
+			"before":        "REDACTED_SENSITIVE",
+		},
+		"name": "private_ssh_key",
+	},
+	"public_ip": {
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": false,
+			"before":        "20.108.176.202",
+		},
+		"name": "public_ip",
+	},
+	"public_url": {
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": false,
+			"before":        "http://20.108.176.202",
+		},
+		"name": "public_url",
+	},
+	"ssh_commands": {
+		"change": {
+			"actions": [
+				"delete",
+			],
+			"after":         null,
+			"after_unknown": false,
+			"before":        "terraform output -json | jq -r .private_ssh_key.value > id_rsa.pem && \\\nchmod 0600 id_rsa.pem && \\\nssh -i id_rsa.pem adminuser@20.108.176.202\n",
+		},
+		"name": "ssh_commands",
+	},
+}
+
+raw = {
+	"configuration": {
+		"provider_config": {
+			"azurerm": {
+				"expressions": {
+					"features": [
+						{},
+					],
+				},
+				"name":               "azurerm",
+				"version_constraint": "~> 2.0",
+			},
+			"module.webserver:azurerm": {
+				"module_address":     "module.webserver",
+				"name":               "azurerm",
+				"version_constraint": "~> 2.0",
+			},
+		},
+		"root_module": {
+			"module_calls": {
+				"webserver": {
+					"expressions": {
+						"location": {
+							"constant_value": "UK South",
+						},
+						"machine_size": {
+							"references": [
+								"var.machine_size",
+							],
+						},
+						"resource_group_name": {
+							"references": [
+								"terraform.workspace",
+							],
+						},
+						"resource_group_tags": {
+							"references": [
+								"terraform.workspace",
+							],
+						},
+					},
+					"module": {
+						"outputs": {
+							"private_ssh_key": {
+								"expression": {
+									"references": [
+										"tls_private_key.example.private_key_pem",
+										"tls_private_key.example",
+									],
+								},
+								"sensitive": true,
+							},
+							"public_ip": {
+								"expression": {
+									"references": [
+										"azurerm_public_ip.example.ip_address",
+										"azurerm_public_ip.example",
+									],
+								},
+							},
+							"public_url": {
+								"expression": {
+									"references": [
+										"azurerm_public_ip.example.ip_address",
+										"azurerm_public_ip.example",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "azurerm_linux_virtual_machine.example",
+								"expressions": {
+									"admin_ssh_key": [
+										{
+											"public_key": {
+												"references": [
+													"tls_private_key.example.public_key_openssh",
+													"tls_private_key.example",
+												],
+											},
+											"username": {
+												"constant_value": "adminuser",
+											},
+										},
+									],
+									"admin_username": {
+										"constant_value": "adminuser",
+									},
+									"custom_data": {
+										"references": [
+											"local.custom_data",
+										],
+									},
+									"location": {
+										"references": [
+											"azurerm_resource_group.example.location",
+											"azurerm_resource_group.example",
+										],
+									},
+									"name": {
+										"constant_value": "example-machine",
+									},
+									"network_interface_ids": {
+										"references": [
+											"azurerm_network_interface.example.id",
+											"azurerm_network_interface.example",
+										],
+									},
+									"os_disk": [
+										{
+											"caching": {
+												"constant_value": "ReadWrite",
+											},
+											"storage_account_type": {
+												"constant_value": "Standard_LRS",
+											},
+										},
+									],
+									"resource_group_name": {
+										"references": [
+											"azurerm_resource_group.example.name",
+											"azurerm_resource_group.example",
+										],
+									},
+									"size": {
+										"references": [
+											"var.machine_size",
+										],
+									},
+									"source_image_reference": [
+										{
+											"offer": {
+												"references": [
+													"var.virtual_machine_source.offer",
+													"var.virtual_machine_source",
+												],
+											},
+											"publisher": {
+												"references": [
+													"var.virtual_machine_source.publisher",
+													"var.virtual_machine_source",
+												],
+											},
+											"sku": {
+												"references": [
+													"var.virtual_machine_source.sku",
+													"var.virtual_machine_source",
+												],
+											},
+											"version": {
+												"references": [
+													"var.virtual_machine_source.version",
+													"var.virtual_machine_source",
+												],
+											},
+										},
+									],
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_linux_virtual_machine",
+							},
+							{
+								"address": "azurerm_network_interface.example",
+								"expressions": {
+									"ip_configuration": [
+										{
+											"name": {
+												"constant_value": "internal",
+											},
+											"private_ip_address_allocation": {
+												"constant_value": "Dynamic",
+											},
+											"public_ip_address_id": {
+												"references": [
+													"azurerm_public_ip.example.id",
+													"azurerm_public_ip.example",
+												],
+											},
+											"subnet_id": {
+												"references": [
+													"azurerm_subnet.example.id",
+													"azurerm_subnet.example",
+												],
+											},
+										},
+									],
+									"location": {
+										"references": [
+											"azurerm_resource_group.example.location",
+											"azurerm_resource_group.example",
+										],
+									},
+									"name": {
+										"constant_value": "example-nic",
+									},
+									"resource_group_name": {
+										"references": [
+											"azurerm_resource_group.example.name",
+											"azurerm_resource_group.example",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_network_interface",
+							},
+							{
+								"address": "azurerm_network_interface_security_group_association.example",
+								"expressions": {
+									"network_interface_id": {
+										"references": [
+											"azurerm_network_interface.example.id",
+											"azurerm_network_interface.example",
+										],
+									},
+									"network_security_group_id": {
+										"references": [
+											"azurerm_network_security_group.example.id",
+											"azurerm_network_security_group.example",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_network_interface_security_group_association",
+							},
+							{
+								"address": "azurerm_network_security_group.example",
+								"expressions": {
+									"location": {
+										"references": [
+											"azurerm_resource_group.example.location",
+											"azurerm_resource_group.example",
+										],
+									},
+									"name": {
+										"constant_value": "http_and_ssh",
+									},
+									"resource_group_name": {
+										"references": [
+											"azurerm_resource_group.example.name",
+											"azurerm_resource_group.example",
+										],
+									},
+									"security_rule": {
+										"constant_value": [
+											{
+												"access":                                     "Allow",
+												"description":                                null,
+												"destination_address_prefix":                 "*",
+												"destination_address_prefixes":               null,
+												"destination_application_security_group_ids": null,
+												"destination_port_range":                     "80",
+												"destination_port_ranges":                    null,
+												"direction":                                  "Inbound",
+												"name":                                       "AllowHTTPInBound",
+												"priority":                                   100,
+												"protocol":                                   "TCP",
+												"source_address_prefix":                      "*",
+												"source_address_prefixes":                    null,
+												"source_application_security_group_ids":      null,
+												"source_port_range":                          "*",
+												"source_port_ranges":                         null,
+											},
+											{
+												"access":                                     "Allow",
+												"description":                                null,
+												"destination_address_prefix":                 "*",
+												"destination_address_prefixes":               null,
+												"destination_application_security_group_ids": null,
+												"destination_port_range":                     "22",
+												"destination_port_ranges":                    null,
+												"direction":                                  "Inbound",
+												"name":                                       "AllowSSHInBound",
+												"priority":                                   120,
+												"protocol":                                   "TCP",
+												"source_address_prefix":                      "*",
+												"source_address_prefixes":                    null,
+												"source_application_security_group_ids":      null,
+												"source_port_range":                          "*",
+												"source_port_ranges":                         null,
+											},
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_network_security_group",
+							},
+							{
+								"address": "azurerm_public_ip.example",
+								"expressions": {
+									"allocation_method": {
+										"constant_value": "Static",
+									},
+									"location": {
+										"references": [
+											"azurerm_resource_group.example.location",
+											"azurerm_resource_group.example",
+										],
+									},
+									"name": {
+										"constant_value": "strawbtest-public-ip",
+									},
+									"resource_group_name": {
+										"references": [
+											"azurerm_resource_group.example.name",
+											"azurerm_resource_group.example",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_public_ip",
+							},
+							{
+								"address": "azurerm_resource_group.example",
+								"expressions": {
+									"location": {
+										"references": [
+											"var.location",
+										],
+									},
+									"name": {
+										"references": [
+											"var.resource_group_name",
+										],
+									},
+									"tags": {
+										"references": [
+											"var.resource_group_tags",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_resource_group",
+							},
+							{
+								"address": "azurerm_subnet.example",
+								"expressions": {
+									"address_prefixes": {
+										"references": [
+											"var.subnet_address_prefixes",
+										],
+									},
+									"name": {
+										"constant_value": "internal",
+									},
+									"resource_group_name": {
+										"references": [
+											"azurerm_resource_group.example.name",
+											"azurerm_resource_group.example",
+										],
+									},
+									"virtual_network_name": {
+										"references": [
+											"azurerm_virtual_network.example.name",
+											"azurerm_virtual_network.example",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_subnet",
+							},
+							{
+								"address": "azurerm_virtual_network.example",
+								"expressions": {
+									"address_space": {
+										"references": [
+											"var.vnet_address_space",
+										],
+									},
+									"location": {
+										"references": [
+											"azurerm_resource_group.example.location",
+											"azurerm_resource_group.example",
+										],
+									},
+									"name": {
+										"constant_value": "strawb-network",
+									},
+									"resource_group_name": {
+										"references": [
+											"azurerm_resource_group.example.name",
+											"azurerm_resource_group.example",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:azurerm",
+								"schema_version":      0,
+								"type":                "azurerm_virtual_network",
+							},
+							{
+								"address": "tls_private_key.example",
+								"expressions": {
+									"algorithm": {
+										"constant_value": "RSA",
+									},
+								},
+								"mode":                "managed",
+								"name":                "example",
+								"provider_config_key": "webserver:tls",
+								"schema_version":      0,
+								"type":                "tls_private_key",
+							},
+						],
+						"variables": {
+							"location": {
+								"default": "UK South",
+							},
+							"machine_size": {
+								"default": "Standard_B1ls",
+							},
+							"resource_group_name": {
+								"default": "strawb-demo-webserver",
+							},
+							"resource_group_tags": {
+								"default": {
+									"Terraform": "true",
+								},
+							},
+							"subnet_address_prefixes": {
+								"default": [
+									"10.0.2.0/24",
+								],
+							},
+							"virtual_machine_source": {
+								"default": {
+									"offer":     "UbuntuServer",
+									"publisher": "Canonical",
+									"sku":       "16.04-LTS",
+									"version":   "latest",
+								},
+							},
+							"vnet_address_space": {
+								"default": [
+									"10.0.0.0/16",
+								],
+							},
+						},
+					},
+					"source":             "app.terraform.io/fancycorp/webserver/azure",
+					"version_constraint": "0.1.1",
+				},
+			},
+			"outputs": {
+				"private_ssh_key": {
+					"expression": {
+						"references": [
+							"module.webserver.private_ssh_key",
+							"module.webserver",
+						],
+					},
+					"sensitive": true,
+				},
+				"public_ip": {
+					"expression": {
+						"references": [
+							"module.webserver.public_ip",
+							"module.webserver",
+						],
+					},
+				},
+				"public_url": {
+					"expression": {
+						"references": [
+							"module.webserver.public_url",
+							"module.webserver",
+						],
+					},
+				},
+				"ssh_commands": {
+					"expression": {
+						"references": [
+							"module.webserver.public_ip",
+							"module.webserver",
+						],
+					},
+				},
+			},
+			"variables": {
+				"machine_size": {
+					"default": "Standard_B1ls",
+				},
+			},
+		},
+	},
+	"format_version": "1.0",
+	"output_changes": {
+		"private_ssh_key": {
+			"actions": [
+				"delete",
+			],
+			"after":            "REDACTED_SENSITIVE",
+			"after_sensitive":  true,
+			"after_unknown":    false,
+			"before":           "REDACTED_SENSITIVE",
+			"before_sensitive": true,
+		},
+		"public_ip": {
+			"actions": [
+				"delete",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    false,
+			"before":           "20.108.176.202",
+			"before_sensitive": false,
+		},
+		"public_url": {
+			"actions": [
+				"delete",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    false,
+			"before":           "http://20.108.176.202",
+			"before_sensitive": false,
+		},
+		"ssh_commands": {
+			"actions": [
+				"delete",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    false,
+			"before":           "terraform output -json | jq -r .private_ssh_key.value > id_rsa.pem && \\\nchmod 0600 id_rsa.pem && \\\nssh -i id_rsa.pem adminuser@20.108.176.202\n",
+			"before_sensitive": false,
+		},
+	},
+	"planned_values": {
+		"root_module": {},
+	},
+	"prior_state": {
+		"format_version":    "1.0",
+		"terraform_version": "1.1.3",
+		"values": {
+			"outputs": {
+				"private_ssh_key": {
+					"sensitive": true,
+					"value":     "REDACTED_SENSITIVE",
+				},
+				"public_ip": {
+					"sensitive": false,
+					"value":     "20.108.176.202",
+				},
+				"public_url": {
+					"sensitive": false,
+					"value":     "http://20.108.176.202",
+				},
+				"ssh_commands": {
+					"sensitive": false,
+					"value":     "terraform output -json | jq -r .private_ssh_key.value > id_rsa.pem && \\\nchmod 0600 id_rsa.pem && \\\nssh -i id_rsa.pem adminuser@20.108.176.202\n",
+				},
+			},
+			"root_module": {
+				"child_modules": [
+					{
+						"address": "module.webserver",
+						"resources": [
+							{
+								"address": "module.webserver.azurerm_linux_virtual_machine.example",
+								"depends_on": [
+									"module.webserver.azurerm_subnet.example",
+									"module.webserver.azurerm_virtual_network.example",
+									"module.webserver.tls_private_key.example",
+									"module.webserver.azurerm_network_interface.example",
+									"module.webserver.azurerm_public_ip.example",
+									"module.webserver.azurerm_resource_group.example",
+								],
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"additional_capabilities": [],
+									"admin_ssh_key": [
+										{},
+									],
+									"boot_diagnostics": [],
+									"identity":         [],
+									"network_interface_ids": [
+										false,
+									],
+									"os_disk": [
+										{
+											"diff_disk_settings": [],
+										},
+									],
+									"plan": [],
+									"private_ip_addresses": [
+										false,
+									],
+									"public_ip_addresses": [
+										false,
+									],
+									"secret": [],
+									"source_image_reference": [
+										{},
+									],
+									"tags": {},
+								},
+								"type": "azurerm_linux_virtual_machine",
+								"values": {
+									"additional_capabilities": [],
+									"admin_password":          "REDACTED_SENSITIVE",
+									"admin_ssh_key": [
+										{
+											"public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqi++bl2HcZdR5juWIXG4EkQcpXN0ir29DsSE8pEbrPg3TimptdjLdwarrfFZEX9Vvj7GACjAH7DqqvDoFbo0/Ax+Mwz/JiXSSR4QOfwXOvKqQq8K3LQFl8prJN/Glp9kLPjfIvHiBqP7YOWPuwDPIQ8REQWCfcDyeuLaTml/QreaWLjXYQu1HG+Q7OmRZmBV9Ocipd18JcB2YlURpkG8b9N9DEsVGrxB/AOhrHbe3GdVcRTFjEGXMlc53MQEG90pN6JWvgkb2VbjfCxV+OoVw9Tpw+IKTYdqJ6MvaNswEs9JCiS4IdEq0Ef6XGJacebspUOwjZo8dBtiXaB1PgyR\n",
+											"username":   "adminuser",
+										},
+									],
+									"admin_username":                  "adminuser",
+									"allow_extension_operations":      true,
+									"availability_set_id":             "",
+									"boot_diagnostics":                [],
+									"computer_name":                   "example-machine",
+									"custom_data":                     "REDACTED_SENSITIVE",
+									"dedicated_host_id":               "",
+									"disable_password_authentication": true,
+									"encryption_at_host_enabled":      false,
+									"eviction_policy":                 "",
+									"extensions_time_budget":          "PT1H30M",
+									"id":            "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Compute/virtualMachines/example-machine",
+									"identity":      [],
+									"license_type":  "",
+									"location":      "uksouth",
+									"max_bid_price": -1,
+									"name":          "example-machine",
+									"network_interface_ids": [
+										"/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+									],
+									"os_disk": [
+										{
+											"caching":                   "ReadWrite",
+											"diff_disk_settings":        [],
+											"disk_encryption_set_id":    "",
+											"disk_size_gb":              30,
+											"name":                      "example-machine_OsDisk_1_d57fd3e4588f4b568d0492013ddacff3",
+											"storage_account_type":      "Standard_LRS",
+											"write_accelerator_enabled": false,
+										},
+									],
+									"patch_mode":            "ImageDefault",
+									"plan":                  [],
+									"platform_fault_domain": -1,
+									"priority":              "Regular",
+									"private_ip_address":    "10.0.2.4",
+									"private_ip_addresses": [
+										"10.0.2.4",
+									],
+									"provision_vm_agent":           true,
+									"proximity_placement_group_id": "",
+									"public_ip_address":            "20.108.176.202",
+									"public_ip_addresses": [
+										"20.108.176.202",
+									],
+									"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+									"secret":              [],
+									"secure_boot_enabled": false,
+									"size":                "Standard_B1ls",
+									"source_image_id":     "",
+									"source_image_reference": [
+										{
+											"offer":     "UbuntuServer",
+											"publisher": "Canonical",
+											"sku":       "16.04-LTS",
+											"version":   "latest",
+										},
+									],
+									"tags":                         {},
+									"timeouts":                     null,
+									"user_data":                    "",
+									"virtual_machine_id":           "0525c089-0eba-49f4-aa2c-5bf41ea7985e",
+									"virtual_machine_scale_set_id": "",
+									"vtpm_enabled":                 false,
+									"zone":                         "",
+								},
+							},
+							{
+								"address": "module.webserver.azurerm_network_interface.example",
+								"depends_on": [
+									"module.webserver.azurerm_public_ip.example",
+									"module.webserver.azurerm_resource_group.example",
+									"module.webserver.azurerm_subnet.example",
+									"module.webserver.azurerm_virtual_network.example",
+								],
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"applied_dns_servers": [],
+									"dns_servers":         [],
+									"ip_configuration": [
+										{},
+									],
+									"private_ip_addresses": [
+										false,
+									],
+									"tags": {},
+								},
+								"type": "azurerm_network_interface",
+								"values": {
+									"applied_dns_servers":           [],
+									"dns_servers":                   [],
+									"enable_accelerated_networking": false,
+									"enable_ip_forwarding":          false,
+									"id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+									"internal_dns_name_label":     "",
+									"internal_domain_name_suffix": "yqneii3awzpujc3esjse2uq2rd.zx.internal.cloudapp.net",
+									"ip_configuration": [
+										{
+											"gateway_load_balancer_frontend_ip_configuration_id": "",
+											"name":                          "internal",
+											"primary":                       true,
+											"private_ip_address":            "10.0.2.4",
+											"private_ip_address_allocation": "Dynamic",
+											"private_ip_address_version":    "IPv4",
+											"public_ip_address_id":          "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/publicIPAddresses/strawbtest-public-ip",
+											"subnet_id":                     "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+										},
+									],
+									"location":           "uksouth",
+									"mac_address":        "00-22-48-40-68-60",
+									"name":               "example-nic",
+									"private_ip_address": "10.0.2.4",
+									"private_ip_addresses": [
+										"10.0.2.4",
+									],
+									"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+									"tags":                {},
+									"timeouts":            null,
+									"virtual_machine_id":  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Compute/virtualMachines/example-machine",
+								},
+							},
+							{
+								"address": "module.webserver.azurerm_network_interface_security_group_association.example",
+								"depends_on": [
+									"module.webserver.azurerm_subnet.example",
+									"module.webserver.azurerm_virtual_network.example",
+									"module.webserver.azurerm_network_interface.example",
+									"module.webserver.azurerm_network_security_group.example",
+									"module.webserver.azurerm_public_ip.example",
+									"module.webserver.azurerm_resource_group.example",
+								],
+								"mode":             "managed",
+								"name":             "example",
+								"provider_name":    "registry.terraform.io/hashicorp/azurerm",
+								"schema_version":   0,
+								"sensitive_values": {},
+								"type":             "azurerm_network_interface_security_group_association",
+								"values": {
+									"id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic|/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+									"network_interface_id":      "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+									"network_security_group_id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+									"timeouts":                  null,
+								},
+							},
+							{
+								"address": "module.webserver.azurerm_network_security_group.example",
+								"depends_on": [
+									"module.webserver.azurerm_resource_group.example",
+								],
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"security_rule": [
+										{
+											"destination_address_prefixes":               [],
+											"destination_application_security_group_ids": [],
+											"destination_port_ranges":                    [],
+											"source_address_prefixes":                    [],
+											"source_application_security_group_ids":      [],
+											"source_port_ranges":                         [],
+										},
+										{
+											"destination_address_prefixes":               [],
+											"destination_application_security_group_ids": [],
+											"destination_port_ranges":                    [],
+											"source_address_prefixes":                    [],
+											"source_application_security_group_ids":      [],
+											"source_port_ranges":                         [],
+										},
+									],
+									"tags": {},
+								},
+								"type": "azurerm_network_security_group",
+								"values": {
+									"id":                  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+									"location":            "uksouth",
+									"name":                "http_and_ssh",
+									"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+									"security_rule": [
+										{
+											"access":                                     "Allow",
+											"description":                                "",
+											"destination_address_prefix":                 "*",
+											"destination_address_prefixes":               [],
+											"destination_application_security_group_ids": [],
+											"destination_port_range":                     "22",
+											"destination_port_ranges":                    [],
+											"direction":                                  "Inbound",
+											"name":                                       "AllowSSHInBound",
+											"priority":                                   120,
+											"protocol":                                   "TCP",
+											"source_address_prefix":                      "*",
+											"source_address_prefixes":                    [],
+											"source_application_security_group_ids":      [],
+											"source_port_range":                          "*",
+											"source_port_ranges":                         [],
+										},
+										{
+											"access":                                     "Allow",
+											"description":                                "",
+											"destination_address_prefix":                 "*",
+											"destination_address_prefixes":               [],
+											"destination_application_security_group_ids": [],
+											"destination_port_range":                     "80",
+											"destination_port_ranges":                    [],
+											"direction":                                  "Inbound",
+											"name":                                       "AllowHTTPInBound",
+											"priority":                                   100,
+											"protocol":                                   "TCP",
+											"source_address_prefix":                      "*",
+											"source_address_prefixes":                    [],
+											"source_application_security_group_ids":      [],
+											"source_port_range":                          "*",
+											"source_port_ranges":                         [],
+										},
+									],
+									"tags":     {},
+									"timeouts": null,
+								},
+							},
+							{
+								"address": "module.webserver.azurerm_public_ip.example",
+								"depends_on": [
+									"module.webserver.azurerm_resource_group.example",
+								],
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"ip_tags": {},
+									"tags":    {},
+									"zones":   [],
+								},
+								"type": "azurerm_public_ip",
+								"values": {
+									"allocation_method": "Static",
+									"availability_zone": "No-Zone",
+									"domain_name_label": null,
+									"fqdn":              null,
+									"id":                "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/publicIPAddresses/strawbtest-public-ip",
+									"idle_timeout_in_minutes": 4,
+									"ip_address":              "20.108.176.202",
+									"ip_tags":                 {},
+									"ip_version":              "IPv4",
+									"location":                "uksouth",
+									"name":                    "strawbtest-public-ip",
+									"public_ip_prefix_id":     null,
+									"resource_group_name":     "strawb-tfc-demo-webserver-azure-test",
+									"reverse_fqdn":            null,
+									"sku":                     "Basic",
+									"sku_tier":                "Regional",
+									"tags":                    {},
+									"timeouts":                null,
+									"zones":                   [],
+								},
+							},
+							{
+								"address":        "module.webserver.azurerm_resource_group.example",
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"tags": {},
+								},
+								"type": "azurerm_resource_group",
+								"values": {
+									"id":       "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test",
+									"location": "uksouth",
+									"name":     "strawb-tfc-demo-webserver-azure-test",
+									"tags": {
+										"Name":      "StrawbTest",
+										"Owner":     "lucy.davinhart@hashicorp.com",
+										"Purpose":   "Terraform TFC Demo Org (FancyCorp)",
+										"Source":    "https://github.com/hashi-strawb/demo-tfcb-fancycorp/tree/main/terraform-azure",
+										"TTL":       "24h",
+										"Terraform": "true",
+										"Workspace": "webserver-azure-test",
+									},
+									"timeouts": null,
+								},
+							},
+							{
+								"address": "module.webserver.azurerm_subnet.example",
+								"depends_on": [
+									"module.webserver.azurerm_resource_group.example",
+									"module.webserver.azurerm_virtual_network.example",
+								],
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"address_prefixes": [
+										false,
+									],
+									"delegation":                  [],
+									"service_endpoint_policy_ids": [],
+									"service_endpoints":           [],
+								},
+								"type": "azurerm_subnet",
+								"values": {
+									"address_prefix": "10.0.2.0/24",
+									"address_prefixes": [
+										"10.0.2.0/24",
+									],
+									"delegation": [],
+									"enforce_private_link_endpoint_network_policies": false,
+									"enforce_private_link_service_network_policies":  false,
+									"id":                          "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+									"name":                        "internal",
+									"resource_group_name":         "strawb-tfc-demo-webserver-azure-test",
+									"service_endpoint_policy_ids": [],
+									"service_endpoints":           [],
+									"timeouts":                    null,
+									"virtual_network_name":        "strawb-network",
+								},
+							},
+							{
+								"address": "module.webserver.azurerm_virtual_network.example",
+								"depends_on": [
+									"module.webserver.azurerm_resource_group.example",
+								],
+								"mode":           "managed",
+								"name":           "example",
+								"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+								"schema_version": 0,
+								"sensitive_values": {
+									"address_space": [
+										false,
+									],
+									"ddos_protection_plan": [],
+									"dns_servers":          [],
+									"subnet": [
+										{},
+									],
+									"tags": {},
+								},
+								"type": "azurerm_virtual_network",
+								"values": {
+									"address_space": [
+										"10.0.0.0/16",
+									],
+									"bgp_community":           "",
+									"ddos_protection_plan":    [],
+									"dns_servers":             [],
+									"flow_timeout_in_minutes": 0,
+									"guid":                "23441ac4-b6a0-445f-8ba4-92644e521c8b",
+									"id":                  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network",
+									"location":            "uksouth",
+									"name":                "strawb-network",
+									"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+									"subnet": [
+										{
+											"address_prefix": "10.0.2.0/24",
+											"id":             "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+											"name":           "internal",
+											"security_group": "",
+										},
+									],
+									"tags":                  {},
+									"timeouts":              null,
+									"vm_protection_enabled": false,
+								},
+							},
+							{
+								"address":          "module.webserver.tls_private_key.example",
+								"mode":             "managed",
+								"name":             "example",
+								"provider_name":    "registry.terraform.io/hashicorp/tls",
+								"schema_version":   0,
+								"sensitive_values": {},
+								"type":             "tls_private_key",
+								"values": {
+									"algorithm":                  "RSA",
+									"ecdsa_curve":                "P224",
+									"id":                         "364c73cdc08010cbe4239921fbf4325807c619bf",
+									"private_key_pem":            "REDACTED_SENSITIVE",
+									"public_key_fingerprint_md5": "9d:81:66:e3:89:28:05:a1:5a:a5:5b:7e:39:ad:d8:c5",
+									"public_key_openssh":         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqi++bl2HcZdR5juWIXG4EkQcpXN0ir29DsSE8pEbrPg3TimptdjLdwarrfFZEX9Vvj7GACjAH7DqqvDoFbo0/Ax+Mwz/JiXSSR4QOfwXOvKqQq8K3LQFl8prJN/Glp9kLPjfIvHiBqP7YOWPuwDPIQ8REQWCfcDyeuLaTml/QreaWLjXYQu1HG+Q7OmRZmBV9Ocipd18JcB2YlURpkG8b9N9DEsVGrxB/AOhrHbe3GdVcRTFjEGXMlc53MQEG90pN6JWvgkb2VbjfCxV+OoVw9Tpw+IKTYdqJ6MvaNswEs9JCiS4IdEq0Ef6XGJacebspUOwjZo8dBtiXaB1PgyR\n",
+									"public_key_pem":             "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxaovvm5dh3GXUeY7liFx\nuBJEHKVzdIq9vQ7EhPKRG6z4N04pqbXYy3cGq63xWRF/Vb4+xgAowB+w6qrw6BW6\nNPwMfjMM/yYl0kkeEDn8FzryqkKvCty0BZfKayTfxpafZCz43yLx4gaj+2Dlj7sA\nzyEPEREFgn3A8nri2k5pf0K3mli412ELtRxvkOzpkWZgVfTnIqXdfCXAdmJVEaZB\nvG/TfQxLFRq8QfwDoax23txnVXEUxYxBlzJXOdzEBBvdKTeiVr4JG9lW43wsVfjq\nFcPU6cPiCk2HaiejL2jbMBLPSQokuCHRKtBH+lxiWnHm7KVDsI2aPHQbYl2gdT4M\nkQIDAQAB\n-----END PUBLIC KEY-----\n",
+									"rsa_bits":                   2048,
+								},
+							},
+						],
+					},
+				],
+			},
+		},
+	},
+	"resource_changes": [
+		{
+			"address": "module.webserver.azurerm_linux_virtual_machine.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"additional_capabilities": [],
+					"admin_password":          "REDACTED_SENSITIVE",
+					"admin_ssh_key": [
+						{
+							"public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqi++bl2HcZdR5juWIXG4EkQcpXN0ir29DsSE8pEbrPg3TimptdjLdwarrfFZEX9Vvj7GACjAH7DqqvDoFbo0/Ax+Mwz/JiXSSR4QOfwXOvKqQq8K3LQFl8prJN/Glp9kLPjfIvHiBqP7YOWPuwDPIQ8REQWCfcDyeuLaTml/QreaWLjXYQu1HG+Q7OmRZmBV9Ocipd18JcB2YlURpkG8b9N9DEsVGrxB/AOhrHbe3GdVcRTFjEGXMlc53MQEG90pN6JWvgkb2VbjfCxV+OoVw9Tpw+IKTYdqJ6MvaNswEs9JCiS4IdEq0Ef6XGJacebspUOwjZo8dBtiXaB1PgyR\n",
+							"username":   "adminuser",
+						},
+					],
+					"admin_username":                  "adminuser",
+					"allow_extension_operations":      true,
+					"availability_set_id":             "",
+					"boot_diagnostics":                [],
+					"computer_name":                   "example-machine",
+					"custom_data":                     "REDACTED_SENSITIVE",
+					"dedicated_host_id":               "",
+					"disable_password_authentication": true,
+					"encryption_at_host_enabled":      false,
+					"eviction_policy":                 "",
+					"extensions_time_budget":          "PT1H30M",
+					"id":            "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Compute/virtualMachines/example-machine",
+					"identity":      [],
+					"license_type":  "",
+					"location":      "uksouth",
+					"max_bid_price": -1,
+					"name":          "example-machine",
+					"network_interface_ids": [
+						"/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+					],
+					"os_disk": [
+						{
+							"caching":                   "ReadWrite",
+							"diff_disk_settings":        [],
+							"disk_encryption_set_id":    "",
+							"disk_size_gb":              30,
+							"name":                      "example-machine_OsDisk_1_d57fd3e4588f4b568d0492013ddacff3",
+							"storage_account_type":      "Standard_LRS",
+							"write_accelerator_enabled": false,
+						},
+					],
+					"patch_mode":            "ImageDefault",
+					"plan":                  [],
+					"platform_fault_domain": -1,
+					"priority":              "Regular",
+					"private_ip_address":    "10.0.2.4",
+					"private_ip_addresses": [
+						"10.0.2.4",
+					],
+					"provision_vm_agent":           true,
+					"proximity_placement_group_id": "",
+					"public_ip_address":            "20.108.176.202",
+					"public_ip_addresses": [
+						"20.108.176.202",
+					],
+					"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+					"secret":              [],
+					"secure_boot_enabled": false,
+					"size":                "Standard_B1ls",
+					"source_image_id":     "",
+					"source_image_reference": [
+						{
+							"offer":     "UbuntuServer",
+							"publisher": "Canonical",
+							"sku":       "16.04-LTS",
+							"version":   "latest",
+						},
+					],
+					"tags":                         {},
+					"timeouts":                     null,
+					"user_data":                    "",
+					"virtual_machine_id":           "0525c089-0eba-49f4-aa2c-5bf41ea7985e",
+					"virtual_machine_scale_set_id": "",
+					"vtpm_enabled":                 false,
+					"zone":                         "",
+				},
+				"before_sensitive": {
+					"additional_capabilities": [],
+					"admin_password":          true,
+					"admin_ssh_key": [
+						{},
+					],
+					"boot_diagnostics": [],
+					"custom_data":      true,
+					"identity":         [],
+					"network_interface_ids": [
+						false,
+					],
+					"os_disk": [
+						{
+							"diff_disk_settings": [],
+						},
+					],
+					"plan": [],
+					"private_ip_addresses": [
+						false,
+					],
+					"public_ip_addresses": [
+						false,
+					],
+					"secret": [],
+					"source_image_reference": [
+						{},
+					],
+					"tags": {},
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_linux_virtual_machine",
+		},
+		{
+			"address": "module.webserver.azurerm_network_interface.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"applied_dns_servers":           [],
+					"dns_servers":                   [],
+					"enable_accelerated_networking": false,
+					"enable_ip_forwarding":          false,
+					"id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+					"internal_dns_name_label":     "",
+					"internal_domain_name_suffix": "yqneii3awzpujc3esjse2uq2rd.zx.internal.cloudapp.net",
+					"ip_configuration": [
+						{
+							"gateway_load_balancer_frontend_ip_configuration_id": "",
+							"name":                          "internal",
+							"primary":                       true,
+							"private_ip_address":            "10.0.2.4",
+							"private_ip_address_allocation": "Dynamic",
+							"private_ip_address_version":    "IPv4",
+							"public_ip_address_id":          "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/publicIPAddresses/strawbtest-public-ip",
+							"subnet_id":                     "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+						},
+					],
+					"location":           "uksouth",
+					"mac_address":        "00-22-48-40-68-60",
+					"name":               "example-nic",
+					"private_ip_address": "10.0.2.4",
+					"private_ip_addresses": [
+						"10.0.2.4",
+					],
+					"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+					"tags":                {},
+					"timeouts":            null,
+					"virtual_machine_id":  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Compute/virtualMachines/example-machine",
+				},
+				"before_sensitive": {
+					"applied_dns_servers": [],
+					"dns_servers":         [],
+					"ip_configuration": [
+						{},
+					],
+					"private_ip_addresses": [
+						false,
+					],
+					"tags": {},
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_network_interface",
+		},
+		{
+			"address": "module.webserver.azurerm_network_interface_security_group_association.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic|/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+					"network_interface_id":      "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkInterfaces/example-nic",
+					"network_security_group_id": "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+					"timeouts":                  null,
+				},
+				"before_sensitive": {},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_network_interface_security_group_association",
+		},
+		{
+			"address": "module.webserver.azurerm_network_security_group.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"id":                  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/networkSecurityGroups/http_and_ssh",
+					"location":            "uksouth",
+					"name":                "http_and_ssh",
+					"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+					"security_rule": [
+						{
+							"access":                                     "Allow",
+							"description":                                "",
+							"destination_address_prefix":                 "*",
+							"destination_address_prefixes":               [],
+							"destination_application_security_group_ids": [],
+							"destination_port_range":                     "22",
+							"destination_port_ranges":                    [],
+							"direction":                                  "Inbound",
+							"name":                                       "AllowSSHInBound",
+							"priority":                                   120,
+							"protocol":                                   "TCP",
+							"source_address_prefix":                      "*",
+							"source_address_prefixes":                    [],
+							"source_application_security_group_ids":      [],
+							"source_port_range":                          "*",
+							"source_port_ranges":                         [],
+						},
+						{
+							"access":                                     "Allow",
+							"description":                                "",
+							"destination_address_prefix":                 "*",
+							"destination_address_prefixes":               [],
+							"destination_application_security_group_ids": [],
+							"destination_port_range":                     "80",
+							"destination_port_ranges":                    [],
+							"direction":                                  "Inbound",
+							"name":                                       "AllowHTTPInBound",
+							"priority":                                   100,
+							"protocol":                                   "TCP",
+							"source_address_prefix":                      "*",
+							"source_address_prefixes":                    [],
+							"source_application_security_group_ids":      [],
+							"source_port_range":                          "*",
+							"source_port_ranges":                         [],
+						},
+					],
+					"tags":     {},
+					"timeouts": null,
+				},
+				"before_sensitive": {
+					"security_rule": [
+						{
+							"destination_address_prefixes":               [],
+							"destination_application_security_group_ids": [],
+							"destination_port_ranges":                    [],
+							"source_address_prefixes":                    [],
+							"source_application_security_group_ids":      [],
+							"source_port_ranges":                         [],
+						},
+						{
+							"destination_address_prefixes":               [],
+							"destination_application_security_group_ids": [],
+							"destination_port_ranges":                    [],
+							"source_address_prefixes":                    [],
+							"source_application_security_group_ids":      [],
+							"source_port_ranges":                         [],
+						},
+					],
+					"tags": {},
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_network_security_group",
+		},
+		{
+			"address": "module.webserver.azurerm_public_ip.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"allocation_method": "Static",
+					"availability_zone": "No-Zone",
+					"domain_name_label": null,
+					"fqdn":              null,
+					"id":                "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/publicIPAddresses/strawbtest-public-ip",
+					"idle_timeout_in_minutes": 4,
+					"ip_address":              "20.108.176.202",
+					"ip_tags":                 {},
+					"ip_version":              "IPv4",
+					"location":                "uksouth",
+					"name":                    "strawbtest-public-ip",
+					"public_ip_prefix_id":     null,
+					"resource_group_name":     "strawb-tfc-demo-webserver-azure-test",
+					"reverse_fqdn":            null,
+					"sku":                     "Basic",
+					"sku_tier":                "Regional",
+					"tags":                    {},
+					"timeouts":                null,
+					"zones":                   [],
+				},
+				"before_sensitive": {
+					"ip_tags": {},
+					"tags":    {},
+					"zones":   [],
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_public_ip",
+		},
+		{
+			"address": "module.webserver.azurerm_resource_group.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"id":       "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test",
+					"location": "uksouth",
+					"name":     "strawb-tfc-demo-webserver-azure-test",
+					"tags": {
+						"Name":      "StrawbTest",
+						"Owner":     "lucy.davinhart@hashicorp.com",
+						"Purpose":   "Terraform TFC Demo Org (FancyCorp)",
+						"Source":    "https://github.com/hashi-strawb/demo-tfcb-fancycorp/tree/main/terraform-azure",
+						"TTL":       "24h",
+						"Terraform": "true",
+						"Workspace": "webserver-azure-test",
+					},
+					"timeouts": null,
+				},
+				"before_sensitive": {
+					"tags": {},
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_resource_group",
+		},
+		{
+			"address": "module.webserver.azurerm_subnet.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"address_prefix": "10.0.2.0/24",
+					"address_prefixes": [
+						"10.0.2.0/24",
+					],
+					"delegation": [],
+					"enforce_private_link_endpoint_network_policies": false,
+					"enforce_private_link_service_network_policies":  false,
+					"id":                          "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+					"name":                        "internal",
+					"resource_group_name":         "strawb-tfc-demo-webserver-azure-test",
+					"service_endpoint_policy_ids": [],
+					"service_endpoints":           [],
+					"timeouts":                    null,
+					"virtual_network_name":        "strawb-network",
+				},
+				"before_sensitive": {
+					"address_prefixes": [
+						false,
+					],
+					"delegation":                  [],
+					"service_endpoint_policy_ids": [],
+					"service_endpoints":           [],
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_subnet",
+		},
+		{
+			"address": "module.webserver.azurerm_virtual_network.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"address_space": [
+						"10.0.0.0/16",
+					],
+					"bgp_community":           "",
+					"ddos_protection_plan":    [],
+					"dns_servers":             [],
+					"flow_timeout_in_minutes": 0,
+					"guid":                "23441ac4-b6a0-445f-8ba4-92644e521c8b",
+					"id":                  "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network",
+					"location":            "uksouth",
+					"name":                "strawb-network",
+					"resource_group_name": "strawb-tfc-demo-webserver-azure-test",
+					"subnet": [
+						{
+							"address_prefix": "10.0.2.0/24",
+							"id":             "/subscriptions/14692f20-9428-451b-8298-102ed4e39c2a/resourceGroups/strawb-tfc-demo-webserver-azure-test/providers/Microsoft.Network/virtualNetworks/strawb-network/subnets/internal",
+							"name":           "internal",
+							"security_group": "",
+						},
+					],
+					"tags":                  {},
+					"timeouts":              null,
+					"vm_protection_enabled": false,
+				},
+				"before_sensitive": {
+					"address_space": [
+						false,
+					],
+					"ddos_protection_plan": [],
+					"dns_servers":          [],
+					"subnet": [
+						{},
+					],
+					"tags": {},
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/azurerm",
+			"type":           "azurerm_virtual_network",
+		},
+		{
+			"address": "module.webserver.tls_private_key.example",
+			"change": {
+				"actions": [
+					"delete",
+				],
+				"after_sensitive": false,
+				"after_unknown":   {},
+				"before": {
+					"algorithm":                  "RSA",
+					"ecdsa_curve":                "P224",
+					"id":                         "364c73cdc08010cbe4239921fbf4325807c619bf",
+					"private_key_pem":            "REDACTED_SENSITIVE",
+					"public_key_fingerprint_md5": "9d:81:66:e3:89:28:05:a1:5a:a5:5b:7e:39:ad:d8:c5",
+					"public_key_openssh":         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFqi++bl2HcZdR5juWIXG4EkQcpXN0ir29DsSE8pEbrPg3TimptdjLdwarrfFZEX9Vvj7GACjAH7DqqvDoFbo0/Ax+Mwz/JiXSSR4QOfwXOvKqQq8K3LQFl8prJN/Glp9kLPjfIvHiBqP7YOWPuwDPIQ8REQWCfcDyeuLaTml/QreaWLjXYQu1HG+Q7OmRZmBV9Ocipd18JcB2YlURpkG8b9N9DEsVGrxB/AOhrHbe3GdVcRTFjEGXMlc53MQEG90pN6JWvgkb2VbjfCxV+OoVw9Tpw+IKTYdqJ6MvaNswEs9JCiS4IdEq0Ef6XGJacebspUOwjZo8dBtiXaB1PgyR\n",
+					"public_key_pem":             "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxaovvm5dh3GXUeY7liFx\nuBJEHKVzdIq9vQ7EhPKRG6z4N04pqbXYy3cGq63xWRF/Vb4+xgAowB+w6qrw6BW6\nNPwMfjMM/yYl0kkeEDn8FzryqkKvCty0BZfKayTfxpafZCz43yLx4gaj+2Dlj7sA\nzyEPEREFgn3A8nri2k5pf0K3mli412ELtRxvkOzpkWZgVfTnIqXdfCXAdmJVEaZB\nvG/TfQxLFRq8QfwDoax23txnVXEUxYxBlzJXOdzEBBvdKTeiVr4JG9lW43wsVfjq\nFcPU6cPiCk2HaiejL2jbMBLPSQokuCHRKtBH+lxiWnHm7KVDsI2aPHQbYl2gdT4M\nkQIDAQAB\n-----END PUBLIC KEY-----\n",
+					"rsa_bits":                   2048,
+				},
+				"before_sensitive": {
+					"private_key_pem": true,
+				},
+			},
+			"mode":           "managed",
+			"module_address": "module.webserver",
+			"name":           "example",
+			"provider_name":  "registry.terraform.io/hashicorp/tls",
+			"type":           "tls_private_key",
+		},
+	],
+	"terraform_version": "1.1.3",
+	"variables": {
+		"machine_size": {
+			"value": "Standard_B1ls",
+		},
+	},
+}
