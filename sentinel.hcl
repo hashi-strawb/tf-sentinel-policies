@@ -9,3 +9,9 @@ policy "azure/mandatory-tags" {
 
   enforcement_level = "soft-mandatory"
 }
+
+policy "common/asteroids" {
+  source = "./common/asteroids.sentinel"
+
+  enforcement_level = "soft-mandatory"
+}
