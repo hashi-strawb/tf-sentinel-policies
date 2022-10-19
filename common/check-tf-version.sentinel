@@ -1,0 +1,40 @@
+# Check that workspace is using latest Terraform
+
+# Imports mock data
+import "tfplan/v2" as tfplan
+import "http"
+import "json"
+
+# For use in testing... specify the latest version, to be used by the PASS test
+param latest_override default ""
+
+current_version = tfplan.terraform_version
+
+check_version_api = func() {
+	req = http.request("https://checkpoint-api.hashicorp.com/v1/check/terraform")
+	resp = json.unmarshal(http.get(req).body)
+
+	print("API Latest Version:", resp["current_version"])
+
+	return resp["current_version"]
+}
+
+check_version = func() {
+	if latest_override != "" {
+		latest_version = latest_override
+		print("Overridden Latest Version:", latest_override)
+	} else {
+		latest_version = check_version_api()
+	}
+
+	if latest_version != current_version {
+		print("Workspace using old Terraform version", current_version, "latest:", latest_version)
+		return false
+	}
+
+	return true
+}
+
+main = rule {
+	check_version() else true
+}

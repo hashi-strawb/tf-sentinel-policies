@@ -9,3 +9,9 @@ policy "azure/mandatory-tags" {
 
   enforcement_level = "soft-mandatory"
 }
+
+policy "common/check-tf-version" {
+  source = "./common/check-tf-version.sentinel"
+
+  enforcement_level = "advisory"
+}
