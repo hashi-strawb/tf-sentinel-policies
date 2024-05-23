@@ -1,6 +1,6 @@
-# Set a fixed "latest" version, so I don't have to keep updating my tests
+# Test what happens when the "newest" version of TF is older than the version in-use
 param "latest_override" {
-  value = "1.3.2"
+  value = "1.0.2"
 }
 
 mock "tfplan/v2" {
