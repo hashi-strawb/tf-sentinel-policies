@@ -27,7 +27,7 @@ check_version = func() {
 		latest_version = check_version_api()
 	}
 
-	if latest_version != current_version {
+	if current_version < latest_version {
 		print("Workspace using old Terraform version", current_version, "latest:", latest_version)
 		return false
 	}
