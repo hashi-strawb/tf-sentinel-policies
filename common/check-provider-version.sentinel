@@ -1,0 +1,49 @@
+// Assuming 5.50.0 is the latest version of a provider...
+//
+// Rules (and tests):
+// 1 - "" = pass; no constraint set, therefore latest
+// 2A - "5.50.0" = trivial pass; same version exactly
+// 3A - "5.1.0" = pass, because it's the latest major version
+// 4A - "4.2.0" = fail, because it's the previous major version
+//
+// However, we don't have access to the exact provider version in use, we only
+// know the constraints in place, so we must work with those. So rules marked A
+// cannot be evaluated directly, we must do something else...
+//
+// Rules:
+// 2B - 5.50.0 satisifes version_constraint
+//   = trivial pass
+// 3B - a version between 5.0.0 and 5.50.0 satisfies version_constraint
+//   = pass; finding a version that matches here is gonna be the hard part
+//           a naive algorithm will just list all versions of the provider
+//           between 5.0.0 and 5.50.0, but we may be able to be smarter, by
+//           considering the actual operators.
+//           if we do... then we'll need more test cases.
+// 4B - no version between 5.0.0 and 5.50.0 satisifes version_constraint
+//   = fail; this is just the inverse of 3B
+
+
+// TODO: find all providers in use
+// tfconfig/v2: providers is a map
+// ID is either "aws" for providers defined at the root module, or
+//   "module.name:aws" for providers defined in modules
+// full_name is "registry.terraform.io/hashicorp/aws" and is what we will use in
+//   our test overrides
+// version_constraint is either "", or a string like "~> 0.82"
+//
+// tfplan/v2: raw.configuration.provider_config has something similar
+// ID as above
+// full_name as above
+// version_constraint is either non-existent, or a string like above
+//
+// Based on
+// https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement/sentinel
+// Either will do, but I'm using Plan as it feels more intuitive
+
+
+// TODO: Rule 1
+// version_constraint == "", or non-existent
+
+main = rule {
+	error("Not Implemented")
+}
