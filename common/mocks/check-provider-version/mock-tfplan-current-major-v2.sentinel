@@ -991,7 +991,7 @@ raw = {
 				},
 				"full_name":          "registry.terraform.io/hashicorp/aws",
 				"name":               "aws",
-				"version_constraint": "~> 5.0",
+				"version_constraint": "= 5.1.0",
 			},
 			"vault": {
 				"full_name": "registry.terraform.io/hashicorp/vault",

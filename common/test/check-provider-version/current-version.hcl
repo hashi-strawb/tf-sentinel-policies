@@ -1,6 +1,6 @@
 param "latest_override" {
   value = {
-    "registry.terraform.io/hashicorp/aws" = "5.50.0"
+    "registry.terraform.io/hashicorp/aws" = ["4.0.0", "5.1.0", "5.50.0"]
   }
 }
 

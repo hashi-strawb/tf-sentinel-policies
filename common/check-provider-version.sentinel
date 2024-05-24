@@ -41,9 +41,59 @@
 // Either will do, but I'm using Plan as it feels more intuitive
 
 
-// TODO: Rule 1
-// version_constraint == "", or non-existent
+// TF Registry API
+// curl https://registry.terraform.io/v1/providers/hashicorp/aws/versions | jq .versions[].version
+
+
+import "tfplan/v2" as tfplan
+import "collection/maps" as maps
+
+# For use in testing... specify the latest version, to be used by the PASS test
+param latest_override default {}
+
+all_providers = tfplan.raw.configuration.provider_config
+
+empty_constraint = func(provider) {
+	// No version constraint = pass this check
+	if ! maps.has(provider, "version_constraint") {
+		print(provider.full_name + " has no constraint")
+		return true
+	}
+	
+	// empty version constraint = pass this check
+	if (provider.version_constraint == "") {
+		print(provider.full_name + " has empty constraint")
+		return true
+	}
+
+	return false
+}
+
+check_provider = func(provider) {
+	if empty_constraint(provider) {
+		return true
+	}
+
+
+	error("Not Implemented (Further Checks Needed)")
+}
+
+check_providers = func() {
+	// Assume true, until we find a provider which fails
+	pass = true
+
+	for all_providers as _, provider {
+		check = check_provider(provider)
+		
+		// if this specific provider fails, we fail on all of them
+		if ! check {
+			pass = false
+		}
+	}
+
+	return pass
+}
 
 main = rule {
-	error("Not Implemented")
+	check_providers()
 }

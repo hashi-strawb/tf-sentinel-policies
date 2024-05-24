@@ -1581,7 +1581,6 @@ raw = {
 				"full_name":          "registry.terraform.io/hashicorp/hcp",
 				"module_address":     "module.webserver",
 				"name":               "hcp",
-				"version_constraint": "~> 0.82",
 			},
 		},
 		"root_module": {
