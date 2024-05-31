@@ -1,0 +1,148 @@
+// Check all 
+
+
+import "tfplan/v2" as tfplan
+import "collection/maps" as maps
+import "collection/lists" as lists
+import "strings"
+import "http"
+import "json"
+import "version"
+
+# For use in testing... specify the latest version, to be used by the PASS test
+param latest_override default {}
+
+all_providers = tfplan.raw.configuration.provider_config
+
+empty_constraint = func(provider) {
+	// No version constraint = pass this check
+	if ! maps.has(provider, "version_constraint") {
+		print(provider.full_name + " has no constraint")
+		return true
+	}
+	
+	// empty version constraint = pass this check
+	if (provider.version_constraint == "") {
+		print(provider.full_name + " has empty constraint")
+		return true
+	}
+
+	return false
+}
+
+// Function to fetch the latest provider versions from the Terraform Registry
+latest_provider_version = func(provider_name) {
+	// TODO: if we have a value for latest_override, use that instead
+
+
+    url = "https://registry.terraform.io/v1/providers/" + provider_name + "/versions"
+    response = http.get(url)
+    if response.status_code != 200 {
+        return null
+    }
+    all_versions = json.unmarshal(response.body).versions
+
+	// now sort the list; we'll need that later anyway
+	all_versions = lists.sort(all_versions, func(current, next) {
+		return version.new(current.version).compare(next.version)
+	})
+
+	// get the latest version (e.g. 5.52.0)
+	latest_version = all_versions[-1].version 
+	// and convert it into the first version for that major release (e.g. 5.0.0)
+	latest_major_version = version.new(strings.join([version.new(latest_version).major, 0, 0], "."))
+
+	versions_to_return = []
+
+	// now remove everything < that
+	// and get rid of the extra data we don't need, and just return the list of versions
+	for all_versions as v {
+		if version.new(v.version).greater_than_or_equals(latest_major_version.version) {
+			versions_to_return = lists.concat(versions_to_return, [v.version])
+		}
+	}
+
+    return versions_to_return
+}
+
+// For simplicity, we only check providers from the public registry
+// i.e. those with full name, for example: registry.terraform.io/hashicorp/aws
+is_public_provider = func(provider_name) {
+	return strings.has_prefix(provider_name, "registry.terraform.io/")
+}
+get_provider_shortname = func(provider_full_name) {
+	return strings.trim_prefix(provider_full_name, "registry.terraform.io/")
+}
+
+
+
+
+check_provider = func(provider) {
+	// no constraint set, therefore always the latest
+	// so as far as this policy is concerend, we're happy
+	if empty_constraint(provider) {
+		return true
+	}
+
+	// For the rest of the tests, we cannot proceed if it's not a public provider
+	// (we could, but then we'd need to auth with the private registry, and i'm leaving that out-of-scope for now)
+
+	if ( ! is_public_provider(provider.full_name) ) {
+		print("Skipping non-public provider:", provider.full_name)
+		return true
+	}
+
+	provider_short_name = get_provider_shortname(provider.full_name)
+
+	// This is a list of all provider versions we would be happy with
+	// e.g. all versions between 5.0.0 and 5.52.0
+	provider_versions = latest_provider_version(provider_short_name)
+	
+	// And does our constraint match any of those?
+	for provider_versions as v {
+		if version.new(v).satisfies(provider.version_constraint) {
+			print (provider.full_name, provider.version_constraint, "matches", v)
+			return true
+		}
+	}
+
+	print (provider.full_name, provider.version_constraint,
+		"does not include any of the latest provider versions between",
+		provider_versions[0], "and", provider_versions[-1])
+	return false
+}
+
+check_providers = func() {
+	// Assume true, until we find a provider which fails
+	pass = true
+
+	for all_providers as _, provider {
+		check = check_provider(provider)
+		
+		// if this specific provider fails, we fail on all of them
+		if ! check {
+			pass = false
+		}
+	}
+
+	return pass
+}
+
+// ------------------------------------------------------------
+// Name:        check-provider-version.sentinel
+// Category:    Utility
+// Provider:    N/A
+// Resource:    N/A
+// Check:       Enforce Latest Major Provider Versions
+// ------------------------------------------------------------
+// Ensures that all providers are using the latest Major
+// version, by evaluating provider constraints
+//
+// For example, if the latest version is v5.52.0, then any
+// constraint that allows at least v5.0.0 will pass
+//
+// The policy only operates on providers in the public registry
+// ------------------------------------------------------------
+main = rule {
+	check_providers()
+}

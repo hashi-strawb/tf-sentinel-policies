@@ -15,3 +15,9 @@ policy "common/check-tf-version" {
 
   enforcement_level = "advisory"
 }
+
+policy "common/check-provider-version" {
+  source = "./common/check-provider-version.sentinel"
+
+  enforcement_level = "advisory"
+}

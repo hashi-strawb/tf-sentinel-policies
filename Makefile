@@ -1,2 +1,2 @@
 test:
-	sentinel test */
+	sentinel test -color */
