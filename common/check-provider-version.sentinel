@@ -16,7 +16,7 @@ all_providers = tfplan.raw.configuration.provider_config
 empty_constraint = func(provider) {
 	// No version constraint = pass this check
 	if !maps.has(provider, "version_constraint") {
-		print(provider.full_name + " has no constraint")
+		print("✅", provider.full_name + " has no constraint")
 		return true
 	}
 
@@ -84,7 +84,7 @@ check_provider = func(provider) {
 	// (we could, but then we'd need to auth with the private registry, and i'm leaving that out-of-scope for now)
 
 	if (!is_public_provider(provider.full_name)) {
-		print("Skipping non-public provider:", provider.full_name)
+		print("⏭️ Skipping non-public provider:", provider.full_name)
 		return true
 	}
 
@@ -97,12 +97,12 @@ check_provider = func(provider) {
 	// And does our constraint match any of those?
 	for provider_versions as v {
 		if version.new(v).satisfies(provider.version_constraint) {
-			print(provider.full_name, provider.version_constraint, "matches", v)
+			print("✅", provider.full_name, provider.version_constraint, "matches", v)
 			return true
 		}
 	}
 
-	print(provider.full_name, provider.version_constraint,
+	print("⛔", provider.full_name, provider.version_constraint,
 		"does not include any of the latest provider versions between",
 		provider_versions[-1], "and", provider_versions[0])
 	return false
