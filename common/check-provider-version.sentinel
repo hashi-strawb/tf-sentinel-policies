@@ -104,7 +104,7 @@ check_provider = func(provider) {
 
 	print(provider.full_name, provider.version_constraint,
 		"does not include any of the latest provider versions between",
-		provider_versions[0], "and", provider_versions[-1])
+		provider_versions[-1], "and", provider_versions[0])
 	return false
 }
 
