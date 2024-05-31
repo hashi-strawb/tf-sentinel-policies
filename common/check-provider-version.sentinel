@@ -1,52 +1,13 @@
-// Assuming 5.50.0 is the latest version of a provider...
-//
-// Rules (and tests):
-// 1 - "" = pass; no constraint set, therefore latest
-// 2A - "5.50.0" = trivial pass; same version exactly
-// 3A - "5.1.0" = pass, because it's the latest major version
-// 4A - "4.2.0" = fail, because it's the previous major version
-//
-// However, we don't have access to the exact provider version in use, we only
-// know the constraints in place, so we must work with those. So rules marked A
-// cannot be evaluated directly, we must do something else...
-//
-// Rules:
-// 2B - 5.50.0 satisifes version_constraint
-//   = trivial pass
-// 3B - a version between 5.0.0 and 5.50.0 satisfies version_constraint
-//   = pass; finding a version that matches here is gonna be the hard part
-//           a naive algorithm will just list all versions of the provider
-//           between 5.0.0 and 5.50.0, but we may be able to be smarter, by
-//           considering the actual operators.
-//           if we do... then we'll need more test cases.
-// 4B - no version between 5.0.0 and 5.50.0 satisifes version_constraint
-//   = fail; this is just the inverse of 3B
-
-
-// TODO: find all providers in use
-// tfconfig/v2: providers is a map
-// ID is either "aws" for providers defined at the root module, or
-//   "module.name:aws" for providers defined in modules
-// full_name is "registry.terraform.io/hashicorp/aws" and is what we will use in
-//   our test overrides
-// version_constraint is either "", or a string like "~> 0.82"
-//
-// tfplan/v2: raw.configuration.provider_config has something similar
-// ID as above
-// full_name as above
-// version_constraint is either non-existent, or a string like above
-//
-// Based on
-// https://developer.hashicorp.com/terraform/cloud-docs/policy-enforcement/sentinel
-// Either will do, but I'm using Plan as it feels more intuitive
-
-
-// TF Registry API
-// curl https://registry.terraform.io/v1/providers/hashicorp/aws/versions | jq .versions[].version
+// Check all 
 
 
 import "tfplan/v2" as tfplan
 import "collection/maps" as maps
+import "collection/lists" as lists
+import "strings"
+import "http"
+import "json"
+import "version"
 
 # For use in testing... specify the latest version, to be used by the PASS test
 param latest_override default {}
@@ -69,13 +30,86 @@ empty_constraint = func(provider) {
 	return false
 }
 
+// Function to fetch the latest provider versions from the Terraform Registry
+latest_provider_version = func(provider_name) {
+	// TODO: if we have a value for latest_override, use that instead
+
+
+    url = "https://registry.terraform.io/v1/providers/" + provider_name + "/versions"
+    response = http.get(url)
+    if response.status_code != 200 {
+        return null
+    }
+    all_versions = json.unmarshal(response.body).versions
+
+	// now sort the list; we'll need that later anyway
+	all_versions = lists.sort(all_versions, func(current, next) {
+		return version.new(current.version).compare(next.version)
+	})
+
+	// get the latest version (e.g. 5.52.0)
+	latest_version = all_versions[-1].version 
+	// and convert it into the first version for that major release (e.g. 5.0.0)
+	latest_major_version = version.new(strings.join([version.new(latest_version).major, 0, 0], "."))
+
+	versions_to_return = []
+
+	// now remove everything < that
+	// and get rid of the extra data we don't need, and just return the list of versions
+	for all_versions as v {
+		if version.new(v.version).greater_than_or_equals(latest_major_version.version) {
+			versions_to_return = lists.concat(versions_to_return, [v.version])
+		}
+	}
+
+    return versions_to_return
+}
+
+// For simplicity, we only check providers from the public registry
+// i.e. those with full name, for example: registry.terraform.io/hashicorp/aws
+is_public_provider = func(provider_name) {
+	return strings.has_prefix(provider_name, "registry.terraform.io/")
+}
+get_provider_shortname = func(provider_full_name) {
+	return strings.trim_prefix(provider_full_name, "registry.terraform.io/")
+}
+
+
+
+
 check_provider = func(provider) {
+	// no constraint set, therefore always the latest
+	// so as far as this policy is concerend, we're happy
 	if empty_constraint(provider) {
 		return true
 	}
 
+	// For the rest of the tests, we cannot proceed if it's not a public provider
+	// (we could, but then we'd need to auth with the private registry, and i'm leaving that out-of-scope for now)
 
-	error("Not Implemented (Further Checks Needed)")
+	if ( ! is_public_provider(provider.full_name) ) {
+		print("Skipping non-public provider:", provider.full_name)
+		return true
+	}
+
+	provider_short_name = get_provider_shortname(provider.full_name)
+
+	// This is a list of all provider versions we would be happy with
+	// e.g. all versions between 5.0.0 and 5.52.0
+	provider_versions = latest_provider_version(provider_short_name)
+	
+	// And does our constraint match any of those?
+	for provider_versions as v {
+		if version.new(v).satisfies(provider.version_constraint) {
+			print (provider.full_name, provider.version_constraint, "matches", v)
+			return true
+		}
+	}
+
+	print (provider.full_name, provider.version_constraint,
+		"does not include any of the latest provider versions between",
+		provider_versions[0], "and", provider_versions[-1])
+	return false
 }
 
 check_providers = func() {
@@ -94,6 +128,21 @@ check_providers = func() {
 	return pass
 }
 
+// ------------------------------------------------------------
+// Name:        check-provider-version.sentinel
+// Category:    Utility
+// Provider:    N/A
+// Resource:    N/A
+// Check:       Enforce Latest Major Provider Versions
+// ------------------------------------------------------------
+// Ensures that all providers are using the latest Major
+// version, by evaluating provider constraints
+//
+// For example, if the latest version is v5.52.0, then any
+// constraint that allows at least v5.0.0 will pass
+//
+// The policy only operates on providers in the public registry
+// ------------------------------------------------------------
 main = rule {
 	check_providers()
 }
