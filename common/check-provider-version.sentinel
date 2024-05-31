@@ -42,11 +42,12 @@ latest_provider_version = func(provider_name) {
 
 	// now sort the list; we'll need that later anyway
 	all_versions = lists.sort(all_versions, func(current, next) {
-		return version.new(current.version).compare(next.version)
+		// sort in reverse order (largest first)
+		return version.new(next.version).compare(current.version)
 	})
 
 	// get the latest version (e.g. 5.52.0)
-	latest_version = all_versions[-1].version
+	latest_version = all_versions[0].version
 	// and convert it into the first version for that major release (e.g. 5.0.0)
 	latest_major_version = version.new(strings.join([version.new(latest_version).major, 0, 0], "."))
 
