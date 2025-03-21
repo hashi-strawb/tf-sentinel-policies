@@ -2,7 +2,7 @@ terraform {
   required_providers {
     random = {
       source  = "hashicorp/random"
-      version = "1.3.1"
+      version = "~> 3.6"
     }
   }
 }
