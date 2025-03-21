@@ -16,6 +16,12 @@ policy "common/check-tf-version" {
   enforcement_level = "advisory"
 }
 
+policy "common/ban-old-tf" {
+  source = "./common/ban-old-tf.sentinel"
+
+  enforcement_level = "soft-mandatory"
+}
+
 policy "common/check-provider-version" {
   source = "./common/check-provider-version.sentinel"
 

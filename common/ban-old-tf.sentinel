@@ -1,0 +1,22 @@
+# Check that workspace is not using old Terraform
+
+# Imports mock data
+import "tfplan/v2" as tfplan
+import "http"
+import "json"
+
+current_version = tfplan.terraform_version
+
+check_version = func() {
+
+	if current_version <= "1.0" {
+		print("Terraform", current_version, " is not supported. You must upgrade to at least v1.0\n\nFor help upgrading, go to https://developer.hashicorp.com/terraform/language/v1.1.x/upgrade-guides/1-0")
+		return false
+	}
+
+	return true
+}
+
+main = rule {
+	check_version() else true
+}
