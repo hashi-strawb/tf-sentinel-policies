@@ -1,0 +1,24 @@
+# Check that workspace is not using local-exec
+
+# Imports mock data
+import "tfplan/v2" as tfplan
+
+raw_root_resources = tfplan.raw.configuration.root_module.resources
+
+# Only consider resources created from the root module for now, as a PoC
+# a real policy would need to also check resources from modules
+root_resources_with_provisioners = filter raw_root_resources as _, r {
+	r contains "provisioners" and
+
+	# And again, as a proof of concept, I'm only looking at the first provisioner
+	r.provisioners[0].type is "local-exec"
+
+	# And you could then filter further to find specific local-exec you want to (dis)allow
+}
+
+# A real policy would make this output prettier... but this is enough to prove the point
+print("Resources using local-exec provisioner:", root_resources_with_provisioners)
+
+main = rule {
+	root_resources_with_provisioners is empty
+}

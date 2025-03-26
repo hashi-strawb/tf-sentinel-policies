@@ -22,6 +22,12 @@ policy "common/ban-old-tf" {
   enforcement_level = "soft-mandatory"
 }
 
+policy "common/ban-local-exec" {
+  source = "./common/ban-local-exec.sentinel"
+
+  enforcement_level = "soft-mandatory"
+}
+
 policy "common/check-provider-version" {
   source = "./common/check-provider-version.sentinel"
 
