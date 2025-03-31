@@ -21,7 +21,7 @@ if [ -z ${TFE_TOKEN} ]; then
     fi
 fi
 
-POLICY_TO_CHECK="global/common/check-tf-version"
+POLICY_TO_CHECK="global/common/ban-local-exec"
 
 
 #
@@ -38,6 +38,11 @@ function check_workspace_run() {
 
     # Get all of this run's policy checks
     run_policy_checks=$(curl -s --header "Authorization: Bearer $TFE_TOKEN" ${TFE_ADDR}/api/v2/runs/${run_id}/policy-checks)
+
+    # If there aren't any policy results... which sometimes happens
+    if [[ $( echo ${run_policy_checks} | jq ".data[0].attributes.result" ) == "null" ]]; then
+        return 0
+    fi
 
     # Check for the policy we care about... and only if they failed
     checked_policy_result=$(
