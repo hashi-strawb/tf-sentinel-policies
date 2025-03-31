@@ -57,6 +57,10 @@ function check_workspace_run() {
 function check_workspace() {
     workspace_id=$1
 
+    # Get Workspace Name, in case we want to present the URL
+    ws_link=$( curl -s --header "Authorization: Bearer $TFE_TOKEN" ${TFE_ADDR}/api/v2/workspaces/${workspace_id} | jq -r '.data.links."self-html"' )
+
+
     # API is paged. We'll only check the first few.
     # Again... proof-of-concept.
     # A real script would want to filter, and limit to maybe only one recent run
@@ -67,6 +71,7 @@ function check_workspace() {
         check_workspace_run ${run_id}
         if [ $? -ne 0 ]; then
             echo "${run_id} is a fail" >&2
+            echo "${TFE_ADDR}${ws_link}/runs/${run_id}" >&2
             return 1
         fi
 
