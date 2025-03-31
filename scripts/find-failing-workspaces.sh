@@ -11,8 +11,14 @@ if [ -z ${TFE_ADDR} ]; then
 fi
 
 if [ -z ${TFE_TOKEN} ]; then
-    echo "Set TFE_TOKEN env var, and try again. You may already have one in ~/.terraform.d/credentials.tfrc.json"
-    exit 1
+    TFE_TOKEN=$(cat ~/.terraform.d/credentials.tfrc.json | jq -r '.credentials."app.terraform.io".token')
+
+    if [ -z ${TFE_TOKEN} ]; then
+        echo "Set TFE_TOKEN env var, and try again"
+        exit 1
+    else
+        echo "Using TFE_TOKEN from ~/.terraform.d/credentials.tfrc.json" >&2
+    fi
 fi
 
 POLICY_TO_CHECK="global/common/check-tf-version"
