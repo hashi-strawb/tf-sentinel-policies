@@ -10,10 +10,23 @@ raw_root_resources = tfplan.raw.configuration.root_module.resources
 root_resources_with_provisioners = filter raw_root_resources as _, r {
 	r contains "provisioners" and
 
-	# And again, as a proof of concept, I'm only looking at the first provisioner
-	r.provisioners[0].type is "local-exec"
+		# And again, as a proof of concept, I'm only looking at the first provisioner
+		r.provisioners[0].type is "local-exec"
+
+	# A local-exec provisioner looks like this:
+	# "provisioners": [
+	#  {
+	#   "expressions": {
+	#    "command": {
+	#     "constant_value": "echo hello world",
+	#    },
+	#   },
+	#   "type": "local-exec",
+	#  },
+	# ],
 
 	# And you could then filter further to find specific local-exec you want to (dis)allow
+	# e.g. by checking r.provisioners[0].expressions.command
 }
 
 # A real policy would make this output prettier... but this is enough to prove the point
