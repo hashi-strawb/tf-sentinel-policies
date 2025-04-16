@@ -2,10 +2,15 @@ terraform {
   required_providers {
     random = {
       source  = "hashicorp/random"
-      version = "~> 3.6"
+      version = "1.0.0"
     }
   }
 }
 
-resource "random_pet" "server" {
+provider "random" {
+  version = "1.0.0"
+}
+
+resource "random_string" "string" {
+  length = 32
 }
