@@ -90,6 +90,10 @@ check_all_resources = func() {
 		}
 	}
 
+	if !rule_pass {
+		print("\nTo fix this, add the following to your AWS provider definition:\n\n  default_tags {\n    tags = {\n         Name      = \"<TODO>\"\n         Owner     = \"lucy.davinhart@ibm.com\"\n         Purpose   = \"<TODO>\"\n         TTL       = \"<TODO>\"\n         Terraform = \"true\"\n         Source    = \"<TODO>\"\n         Workspace = terraform.workspace\n       }\n     }")
+	}
+
 	return rule_pass
 }
 
